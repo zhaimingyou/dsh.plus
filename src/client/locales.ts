@@ -1,4 +1,4 @@
-/** zh/en dictionaries for the dsh-plus-catalog settings section. */
+/** zh/en dictionaries for the dsh.plus settings section. */
 
 export const zh = {
   nav: '插件目录',

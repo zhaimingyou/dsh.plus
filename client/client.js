@@ -1,4 +1,4 @@
-window.__ModuleLoader__.load({ id: "dsh-plus-catalog", factory: (require) => {
+window.__ModuleLoader__.load({ id: "dsh.plus", factory: (require) => {
 
 
 		var module = { exports: {} };
@@ -83,7 +83,7 @@ window.__ModuleLoader__.load({ id: "dsh-plus-catalog", factory: (require) => {
 			(0, react.useEffect)(() => {
 				let cancelled = false;
 				setStatus("loading");
-				fetch(`/dsh-plus-catalog/catalog?locale=${lang}`).then((response) => {
+				fetch(`/dsh.plus/catalog?locale=${lang}`).then((response) => {
 					if (!response.ok) throw new Error(`HTTP ${response.status}`);
 					return response.json();
 				}).then((data) => {
@@ -217,7 +217,7 @@ window.__ModuleLoader__.load({ id: "dsh-plus-catalog", factory: (require) => {
 							onClick: () => {
 								setStatus("loading");
 								setCategory("all");
-								fetch(`/dsh-plus-catalog/catalog?locale=${lang}`).then((r) => r.ok ? r.json() : Promise.reject(/* @__PURE__ */ new Error())).then((d) => {
+								fetch(`/dsh.plus/catalog?locale=${lang}`).then((r) => r.ok ? r.json() : Promise.reject(/* @__PURE__ */ new Error())).then((d) => {
 									setEntries(Array.isArray(d.entries) ? d.entries : []);
 									setStatus("ready");
 								}).catch(() => setStatus("error"));
@@ -324,7 +324,7 @@ window.__ModuleLoader__.load({ id: "dsh-plus-catalog", factory: (require) => {
 		}
 		//#endregion
 		//#region src/client/locales.ts
-		/** zh/en dictionaries for the dsh-plus-catalog settings section. */
+		/** zh/en dictionaries for the dsh.plus settings section. */
 		const zh = {
 			nav: "插件目录",
 			title: "dsh.plus 插件目录",
@@ -389,17 +389,17 @@ window.__ModuleLoader__.load({ id: "dsh-plus-catalog", factory: (require) => {
 		};
 		//#endregion
 		//#region src/client/styles.ts
-		/** Scoped styles for the dsh-plus-catalog section. Class names are prefixed
+		/** Scoped styles for the dsh.plus section. Class names are prefixed
 		* dsc- to avoid colliding with the host shell or other plugins. Colors come
 		* from the DSH web design tokens so light/dark theming follows the host. */
 		function installStyles() {
 			if (typeof document === "undefined") return () => {};
-			const id = "dsh-plus-catalog-catalog";
+			const id = "dsh.plus-catalog";
 			if (document.getElementById(id) !== null) return () => {};
 			const style = document.createElement("style");
 			style.id = id;
-			style.dataset.plugin = "dsh-plus-catalog";
-			style.dataset.pluginCss = "dsh-plus-catalog/catalog";
+			style.dataset.plugin = "dsh.plus";
+			style.dataset.pluginCss = "dsh.plus/catalog";
 			style.textContent = CSS;
 			document.head.appendChild(style);
 			return () => {
@@ -618,11 +618,11 @@ window.__ModuleLoader__.load({ id: "dsh-plus-catalog", factory: (require) => {
 `;
 		//#endregion
 		//#region src/client/index.ts
-		const NS = "dsh-plus-catalog";
-		const name = "dsh-plus-catalog";
+		const NS = "dsh.plus";
+		const name = "dsh.plus";
 		const inject = ["slots", "locale"];
 		/**
-		* Client entry: register the "dsh-plus-catalog" section in the Settings
+		* Client entry: register the "dsh.plus" section in the Settings
 		* shell so the gallery renders as a first-class page. Built by tsdown into
 		* the __ModuleLoader__ factory bundle at client/client.js.
 		*/
@@ -630,12 +630,12 @@ window.__ModuleLoader__.load({ id: "dsh-plus-catalog", factory: (require) => {
 			ctx.effect(() => ctx.locale.register(NS, {
 				zh,
 				en
-			}), "dsh-plus-catalog: dictionaries");
-			ctx.effect(() => installStyles(), "dsh-plus-catalog: styles");
+			}), "dsh.plus: dictionaries");
+			ctx.effect(() => installStyles(), "dsh.plus: styles");
 			const t = ctx.locale.bind(NS);
 			ctx.slots.inject("settings.section", () => ctx.slots.register({
 				name: "settings.section",
-				id: "dsh-plus-catalog",
+				id: "dsh.plus",
 				order: 50,
 				label: () => t("nav"),
 				locale: NS,

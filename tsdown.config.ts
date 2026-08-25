@@ -1,6 +1,6 @@
 import { defineConfig } from 'tsdown'
 
-const id = 'dsh-plus-catalog'
+const id = 'dsh.plus'
 
 /**
  * Externals resolved from the loader module table at runtime (the host seeds

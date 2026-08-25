@@ -1,15 +1,15 @@
-/** Scoped styles for the dsh-plus-catalog section. Class names are prefixed
+/** Scoped styles for the dsh.plus section. Class names are prefixed
  * dsc- to avoid colliding with the host shell or other plugins. Colors come
  * from the DSH web design tokens so light/dark theming follows the host. */
 
 export function installStyles(): () => void {
   if (typeof document === 'undefined') return () => {}
-  const id = 'dsh-plus-catalog-catalog'
+  const id = 'dsh.plus-catalog'
   if (document.getElementById(id) !== null) return () => {}
   const style = document.createElement('style')
   style.id = id
-  style.dataset.plugin = 'dsh-plus-catalog'
-  style.dataset.pluginCss = 'dsh-plus-catalog/catalog'
+  style.dataset.plugin = 'dsh.plus'
+  style.dataset.pluginCss = 'dsh.plus/catalog'
   style.textContent = CSS
   document.head.appendChild(style)
   return () => {

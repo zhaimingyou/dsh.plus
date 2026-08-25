@@ -94,7 +94,7 @@ export function CatalogSection({ t, locale }: { t: Translate; locale: LocaleRef 
   useEffect(() => {
     let cancelled = false
     setStatus('loading')
-    fetch(`/dsh-plus-catalog/catalog?locale=${lang}`)
+    fetch(`/dsh.plus/catalog?locale=${lang}`)
       .then((response) => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`)
         return response.json() as Promise<CatalogResponse>
@@ -226,7 +226,7 @@ export function CatalogSection({ t, locale }: { t: Translate; locale: LocaleRef 
             onClick={() => {
               setStatus('loading')
               setCategory('all')
-              fetch(`/dsh-plus-catalog/catalog?locale=${lang}`)
+              fetch(`/dsh.plus/catalog?locale=${lang}`)
                 .then((r) => (r.ok ? r.json() as Promise<CatalogResponse> : Promise.reject(new Error())))
                 .then((d) => {
                   setEntries(Array.isArray(d.entries) ? d.entries : [])

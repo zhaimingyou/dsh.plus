@@ -1,4 +1,4 @@
-# dsh-plus-catalog
+# dsh.plus
 
 English | [中文](README.zh.md)
 
@@ -19,10 +19,10 @@ A [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (DSH) plug
 
 ```sh
 # from GitHub (dev / preview)
-dsh plugin --profile web add github:zhaimingyou/dsh-plus-catalog
+dsh plugin --profile web add github:zhaimingyou/dsh.plus
 
 # once published to npm:
-dsh plugin --profile web add dsh-plus-catalog
+dsh plugin --profile web add dsh.plus
 ```
 
 Restart DSH, then open **Settings → Plugin Catalog**.
@@ -57,7 +57,7 @@ Artifacts: `lib/` (host, ESM) + `client/client.js` (browser factory bundle, comm
 src/
 ├── index.ts             # host entry: inject webServer, mount routes
 ├── catalog.ts           # fetch + merge + sanitize the dsh.plus catalog
-├── routes.ts            # GET /dsh-plus-catalog/catalog
+├── routes.ts            # GET /dsh.plus/catalog
 ├── http.ts              # minimal JSON response helper
 └── client/              # browser half (bundled by tsdown)
     ├── index.ts         # registers settings.section

@@ -83,7 +83,7 @@ async function loadStars(): Promise<Map<string, number>> {
     }
   } catch (cause) {
     // Stars are a nice-to-have; a failed stats fetch must not blank the catalog.
-    console.error('[dsh-plus-catalog] failed to load star counts:', cause)
+    console.error('[dsh.plus] failed to load star counts:', cause)
   }
   return map
 }

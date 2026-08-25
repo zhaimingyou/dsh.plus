@@ -16,7 +16,7 @@ export interface CatalogHost {
   logger?: { warn(message: string): void }
 }
 
-export const CATALOG_ROUTE = '/dsh-plus-catalog/catalog'
+export const CATALOG_ROUTE = '/dsh.plus/catalog'
 
 /**
  * Register the catalog route. Read-only GET; returns the merged, sanitized
@@ -39,7 +39,7 @@ export function mountCatalogRoutes(host: CatalogHost): () => void {
         sendJson(response, 200, { ok: true, generatedAt: new Date().toISOString(), entries })
       } catch (cause) {
         const message = cause instanceof Error ? cause.message : String(cause)
-        host.logger?.warn(`[dsh-plus-catalog] ${message}`)
+        host.logger?.warn(`[dsh.plus] ${message}`)
         sendJson(response, 502, { ok: false, error: 'catalog unavailable' })
       }
     },

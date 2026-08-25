@@ -1,5 +1,5 @@
 {
-  "name": "dsh-plus-catalog",
+  "name": "dsh.plus",
   "description": "DeepSeek Harness plugin that shows the dsh.plus curated plugin catalog inside DSH — browse, copy the install command, open GitHub. · 在 DeepSeek Harness 内展示 dsh.plus 精选插件目录：浏览、复制安装命令、打开 GitHub。",
   "version": "0.1.0",
   "type": "module",
@@ -8,7 +8,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zhaimingyou/dsh-plus-catalog.git"
+    "url": "git+https://github.com/zhaimingyou/dsh.plus.git"
   },
   "homepage": "https://dsh.plus",
   "keywords": [

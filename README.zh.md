@@ -1,4 +1,4 @@
-# dsh-plus-catalog
+# dsh.plus
 
 [English](README.md) | 中文
 
@@ -19,10 +19,10 @@
 
 ```sh
 # 从 GitHub 安装（开发/尝鲜）
-dsh plugin --profile web add github:zhaimingyou/dsh-plus-catalog
+dsh plugin --profile web add github:zhaimingyou/dsh.plus
 
 # 发布到 npm 后：
-dsh plugin --profile web add dsh-plus-catalog
+dsh plugin --profile web add dsh.plus
 ```
 
 安装后重启 DSH，打开 **设置 → 插件目录** 即可看到画廊。
@@ -57,7 +57,7 @@ npm run check       # typecheck + build + preflight 守护
 src/
 ├── index.ts             # host 入口：注入 webServer、挂载路由
 ├── catalog.ts           # 拉取 + 合并 + 清洗 dsh.plus 目录
-├── routes.ts            # GET /dsh-plus-catalog/catalog
+├── routes.ts            # GET /dsh.plus/catalog
 ├── http.ts              # JSON 响应的最小工具
 └── client/              # 浏览器半侧（tsdown 打包）
     ├── index.ts         # 注册 settings.section

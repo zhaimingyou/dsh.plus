@@ -1,7 +1,7 @@
 import type { Context } from '@deepseek-ai/cordis'
 import { mountCatalogRoutes, type CatalogHost } from './routes.ts'
 
-export const name = 'dsh-plus-catalog'
+export const name = 'dsh.plus'
 
 /** The scoped context the webServer injection hands to the callback. */
 interface ScopedHost extends CatalogHost {
@@ -16,6 +16,6 @@ interface ScopedHost extends CatalogHost {
 export function apply(ctx: Context): void {
   ctx.inject(['webServer'], (hostCtx: Context) => {
     const host = hostCtx as unknown as ScopedHost
-    host.effect(() => mountCatalogRoutes(host), 'dsh-plus-catalog: http routes')
+    host.effect(() => mountCatalogRoutes(host), 'dsh.plus: http routes')
   })
 }
