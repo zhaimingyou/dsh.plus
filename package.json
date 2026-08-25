@@ -1,0 +1,77 @@
+{
+  "name": "dsh-plus-catalog",
+  "description": "DeepSeek Harness plugin that shows the dsh.plus curated plugin catalog inside DSH — browse, copy the install command, open GitHub. · 在 DeepSeek Harness 内展示 dsh.plus 精选插件目录：浏览、复制安装命令、打开 GitHub。",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhaimingyou/dsh-plus-catalog.git"
+  },
+  "homepage": "https://dsh.plus",
+  "keywords": [
+    "deepseek",
+    "harness",
+    "dsh",
+    "dsh-plugin",
+    "catalog",
+    "market",
+    "plugin-directory",
+    "dsh-plus"
+  ],
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.client.json --noEmit",
+    "build": "tsc -p tsconfig.json && npm run build:client",
+    "build:client": "tsdown && node scripts/normalize-client-banner.mjs",
+    "check": "npm run typecheck && npm run build && node scripts/preflight.mjs",
+    "prepare": "npm run build",
+    "prepack": "npm run build && node scripts/preflight.mjs"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-ui-theme"
+      ],
+      "platform": "web"
+    }
+  },
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./client": "./client/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "src",
+    "client",
+    "cordis.patch.yml",
+    "LICENSE"
+  ],
+  "devDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@types/node": "^22.0.0",
+    "@types/react": "~18.3.1",
+    "react": "^18.3.1",
+    "tsdown": "^0.22.14",
+    "typescript": "^5.7.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
+}
