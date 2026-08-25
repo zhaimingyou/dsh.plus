@@ -74,6 +74,12 @@ scripts/                 # banner normalization + preflight guard
 
 [dsh.plus](https://dsh.plus) is the bilingual DSH ecosystem portal and curated plugin directory. This plugin is its in-DSH rendering: the host process reads dsh.plus’s public catalog data at runtime, and this repository bundles no plugin snapshot or third-party code.
 
+## Disclaimers
+
+- This plugin is maintained independently by the dsh.plus community and is not affiliated with or endorsed by DeepSeek AI or the official DeepSeek Harness project.
+- Catalog listings are third-party open-source code; this plugin only browses metadata and does not install, execute, or review any plugin code. Verify a plugin’s source and trustworthiness before installing it.
+- Compatibility: targets the DeepSeek Harness `web` client (`dsh web`) with `dsh.client` support.
+
 ## License
 
 [MIT](LICENSE)

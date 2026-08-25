@@ -74,6 +74,12 @@ scripts/                 # banner 规范化 + preflight 守护
 
 [dsh.plus](https://dsh.plus) 是 DSH 生态的双语门户与插件精选目录。本插件是它的 DSH 内呈现：宿主进程在运行时读取 dsh.plus 的公开目录数据，本仓库不含任何插件快照或第三方代码。
 
+## 声明
+
+- 本插件由 dsh.plus 社区独立维护，与 DeepSeek AI 及其官方 DeepSeek Harness 项目无隶属或背书关系。
+- 目录所列插件均为第三方开源代码；本插件仅浏览元数据，不安装、不执行、也不审查任何插件代码。安装或运行第三方插件前，请自行核实其来源与可信度。
+- 兼容性：面向支持 `dsh.client` 的 DeepSeek Harness `web` 端（对应官方 `dsh web`）。
+
 ## License
 
 [MIT](LICENSE)
