@@ -6,6 +6,10 @@
 
 > 本插件是**只读浏览画廊**：它展示其他插件的入口，不执行安装、不执行任何插件代码、不修改 profile。安装命令由宿主按 GitHub 仓库地址推导，仅供复制。
 
+## 截图
+
+![dsh.plus 插件 — 在 DeepSeek Harness 内展示精选插件目录](./dshplustupian.png)
+
 ## 特性
 
 - **实时数据**：host 侧实时读取 dsh.plus 的公开目录契约 `/v1/plugins` 与 `/plugin-index.json`，网站更新即同步，无需额外部署。

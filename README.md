@@ -6,6 +6,10 @@ A [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (DSH) plug
 
 > This plugin is a **read-only gallery**: it surfaces entries to other plugins. It installs nothing, executes no plugin code, and never mutates the profile. The install command is derived by the host from the GitHub repository URL and is shown for copying only.
 
+## Screenshot
+
+![dsh.plus plugin — the curated catalog shown inside DeepSeek Harness](./dshplustupian.png)
+
 ## Features
 
 - **Live data**: the host fetches dsh.plus’s public catalog contract (`/v1/plugins` + `/plugin-index.json`) at runtime — the site updates and the gallery follows, with no extra deployment.
