@@ -36,6 +36,14 @@ function formatStars(stars: number): string {
   return String(stars)
 }
 
+/** `dsh plugin --profile web add github:owner/repo` -> `github:owner/repo`.
+ * The full command stays on the title tooltip and is what Copy writes. */
+function shortSpec(install: string): string {
+  const marker = ' add '
+  const index = install.indexOf(marker)
+  return index === -1 ? install : install.slice(index + marker.length)
+}
+
 async function copyText(text: string): Promise<boolean> {
   try {
     await navigator.clipboard.writeText(text)
@@ -246,7 +254,7 @@ export function CatalogSection({ t, locale }: { t: Translate; locale: LocaleRef 
 
       {status === 'ready' && visible.length > 0 && (
         <>
-          <div className="dsc-count">{visible.length} {t('many')}</div>
+          <div className="dsc-count">{visible.length} {t('many')} · {t('installHint')}</div>
           <div className="dsc-grid">
             {visible.map((entry) => (
               <article key={entry.id} className="dsc-card">
@@ -258,7 +266,7 @@ export function CatalogSection({ t, locale }: { t: Translate; locale: LocaleRef 
                         {entry.name}
                       </a>
                     </h3>
-                    <p className="dsc-summary">{entry.summary}</p>
+                    <p className="dsc-summary" title={entry.summary}>{entry.summary}</p>
                   </div>
                 </div>
 
@@ -274,7 +282,9 @@ export function CatalogSection({ t, locale }: { t: Translate; locale: LocaleRef 
 
                 <div className="dsc-meta">
                   <span className="dsc-stars">⭐ {formatStars(entry.stars)}</span>
-                  {entry.license && <span>{entry.license}</span>}
+                  {entry.license && (
+                    <span>{entry.license === 'NOASSERTION' ? t('licenseCustom') : entry.license}</span>
+                  )}
                   {entry.publisher && (
                     <span>
                       {t('publishedBy')} {entry.publisher}
@@ -285,22 +295,27 @@ export function CatalogSection({ t, locale }: { t: Translate; locale: LocaleRef 
                       {t('updatedAt')} {formatDate(entry.updatedAt)}
                     </span>
                   )}
+                  <a
+                    className="dsc-meta-link"
+                    href={entry.repository}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    GitHub ↗
+                  </a>
                 </div>
 
                 {entry.install && (
-                  <div className="dsc-actions">
-                    <div className="dsc-install">
-                      <code title={entry.install}>{entry.install}</code>
-                      <button type="button" className="dsc-btn dsc-btn-primary" onClick={() => copyInstall(entry)}>
-                        {copiedId === entry.id ? t('copied') : t('copy')}
-                      </button>
-                    </div>
-                    <div className="dsc-actions-row">
-                      <a className="dsc-btn dsc-btn-primary" href={entry.repository} target="_blank" rel="noopener noreferrer">
-                        {t('github')} ↗
-                      </a>
-                      <span className="dsc-install-hint">{t('installHint')}</span>
-                    </div>
+                  <div className="dsc-install">
+                    <code title={entry.install}>{shortSpec(entry.install)}</code>
+                    <button
+                      type="button"
+                      className="dsc-btn dsc-btn-primary"
+                      title={t('installHint')}
+                      onClick={() => copyInstall(entry)}
+                    >
+                      {copiedId === entry.id ? t('copied') : t('copy')}
+                    </button>
                   </div>
                 )}
               </article>

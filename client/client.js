@@ -34,6 +34,12 @@ window.__ModuleLoader__.load({ id: "dsh.plus", factory: (require) => {
 			if (stars >= 1e3) return (stars / 1e3).toFixed(1).replace(/\.0$/, "") + "k";
 			return String(stars);
 		}
+		/** `dsh plugin --profile web add github:owner/repo` -> `github:owner/repo`.
+		* The full command stays on the title tooltip and is what Copy writes. */
+		function shortSpec(install) {
+			const index = install.indexOf(" add ");
+			return index === -1 ? install : install.slice(index + 5);
+		}
 		async function copyText(text) {
 			try {
 				await navigator.clipboard.writeText(text);
@@ -234,7 +240,9 @@ window.__ModuleLoader__.load({ id: "dsh.plus", factory: (require) => {
 						children: [
 							visible.length,
 							" ",
-							t("many")
+							t("many"),
+							" · ",
+							t("installHint")
 						]
 					}), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", {
 						className: "dsc-grid",
@@ -258,6 +266,7 @@ window.__ModuleLoader__.load({ id: "dsh.plus", factory: (require) => {
 											})
 										}), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("p", {
 											className: "dsc-summary",
+											title: entry.summary,
 											children: entry.summary
 										})]
 									})]
@@ -276,7 +285,7 @@ window.__ModuleLoader__.load({ id: "dsh.plus", factory: (require) => {
 											className: "dsc-stars",
 											children: ["⭐ ", formatStars(entry.stars)]
 										}),
-										entry.license && /* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", { children: entry.license }),
+										entry.license && /* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", { children: entry.license === "NOASSERTION" ? t("licenseCustom") : entry.license }),
 										entry.publisher && /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("span", { children: [
 											t("publishedBy"),
 											" ",
@@ -286,34 +295,27 @@ window.__ModuleLoader__.load({ id: "dsh.plus", factory: (require) => {
 											t("updatedAt"),
 											" ",
 											formatDate(entry.updatedAt)
-										] })
-									]
-								}),
-								entry.install && /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
-									className: "dsc-actions",
-									children: [/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
-										className: "dsc-install",
-										children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("code", {
-											title: entry.install,
-											children: entry.install
-										}), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("button", {
-											type: "button",
-											className: "dsc-btn dsc-btn-primary",
-											onClick: () => copyInstall(entry),
-											children: copiedId === entry.id ? t("copied") : t("copy")
-										})]
-									}), /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
-										className: "dsc-actions-row",
-										children: [/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("a", {
-											className: "dsc-btn dsc-btn-primary",
+										] }),
+										/* @__PURE__ */ (0, react_jsx_runtime.jsx)("a", {
+											className: "dsc-meta-link",
 											href: entry.repository,
 											target: "_blank",
 											rel: "noopener noreferrer",
-											children: [t("github"), " ↗"]
-										}), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", {
-											className: "dsc-install-hint",
-											children: t("installHint")
-										})]
+											children: "GitHub ↗"
+										})
+									]
+								}),
+								entry.install && /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
+									className: "dsc-install",
+									children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("code", {
+										title: entry.install,
+										children: shortSpec(entry.install)
+									}), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("button", {
+										type: "button",
+										className: "dsc-btn dsc-btn-primary",
+										title: t("installHint"),
+										onClick: () => copyInstall(entry),
+										children: copiedId === entry.id ? t("copied") : t("copy")
 									})]
 								})
 							]
@@ -349,7 +351,8 @@ window.__ModuleLoader__.load({ id: "dsh.plus", factory: (require) => {
 			install: "安装",
 			copy: "复制",
 			copied: "已复制",
-			installHint: "在 DSH CLI 中粘贴即可把该插件装进当前 web profile",
+			installHint: "安装：复制命令后粘贴到 DSH CLI 即可",
+			licenseCustom: "自定义协议",
 			github: "GitHub",
 			updatedAt: "更新于",
 			publishedBy: "作者",
@@ -380,7 +383,8 @@ window.__ModuleLoader__.load({ id: "dsh.plus", factory: (require) => {
 			install: "Install",
 			copy: "Copy",
 			copied: "Copied",
-			installHint: "Paste into the DSH CLI to install this plugin into the current web profile",
+			installHint: "Install: copy the command, then paste it into the DSH CLI",
+			licenseCustom: "Custom",
 			github: "GitHub",
 			updatedAt: "Updated",
 			publishedBy: "by",
@@ -558,7 +562,6 @@ window.__ModuleLoader__.load({ id: "dsh.plus", factory: (require) => {
   line-height: 1.5;
 }
 .dsc-stars { color: var(--dsw-alias-label-primary); font-weight: 600; }
-.dsc-actions { display: flex; flex-direction: column; gap: 8px; }
 .dsc-install {
   display: flex;
   align-items: center;
@@ -598,8 +601,8 @@ window.__ModuleLoader__.load({ id: "dsh.plus", factory: (require) => {
   border-color: var(--dsw-alias-brand-primary);
   color: var(--dsw-alias-brand-primary);
 }
-.dsc-actions-row { display: flex; gap: 8px; align-items: center; }
-.dsc-install-hint { color: var(--dsw-alias-label-secondary); font-size: 11px; line-height: 1.5; }
+.dsc-meta-link { color: var(--dsw-alias-label-secondary); text-decoration: none; }
+.dsc-meta-link:hover { color: var(--dsw-alias-brand-primary); }
 .dsc-state {
   padding: 28px 16px;
   border: 1px dashed var(--dsw-alias-border-l1);

@@ -169,7 +169,6 @@ const CSS = `
   line-height: 1.5;
 }
 .dsc-stars { color: var(--dsw-alias-label-primary); font-weight: 600; }
-.dsc-actions { display: flex; flex-direction: column; gap: 8px; }
 .dsc-install {
   display: flex;
   align-items: center;
@@ -209,8 +208,8 @@ const CSS = `
   border-color: var(--dsw-alias-brand-primary);
   color: var(--dsw-alias-brand-primary);
 }
-.dsc-actions-row { display: flex; gap: 8px; align-items: center; }
-.dsc-install-hint { color: var(--dsw-alias-label-secondary); font-size: 11px; line-height: 1.5; }
+.dsc-meta-link { color: var(--dsw-alias-label-secondary); text-decoration: none; }
+.dsc-meta-link:hover { color: var(--dsw-alias-brand-primary); }
 .dsc-state {
   padding: 28px 16px;
   border: 1px dashed var(--dsw-alias-border-l1);
